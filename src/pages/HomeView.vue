@@ -29,7 +29,7 @@ export default {
     };
   },
   async created() {
-    this.user = await userService.getUser();
+    this.user = await userService.getLoggedinUser();
     this.rate = await bitcoinService.getRate();
   },
 };

@@ -5,13 +5,21 @@ import { bitcoinService } from "@/services/bitcoin.service.js";
 export default {
   data() {
     return {
-      user: null,
       rate: 0,
     };
   },
   async created() {
-    this.user = await userService.getUser();
+    this.user = await userService.getLoggedinUser();
     this.rate = await bitcoinService.getRate();
+  },
+  computed: {
+    filteredContacts() {
+      const regex = new RegExp(this.filterBy.txt, "i");
+      return this.contacts.filter((contact) => regex.test(contact.name));
+    },
+    user() {
+      return this.$store.state.userStore.user;
+    },
   },
 };
 </script>
@@ -26,7 +34,8 @@ export default {
       <div class="dollar"><span class="e">$1 = </span> {{ rate }}฿</div>
     </div>
     <div class="header-info flex">
-      <div v-if="user" class="user-details">
+      <div v-if="user" class="user-details flex">
+        <img :src="user.imgUrl" alt="" class="user-img" />
         <span>
           {{ user.name }}
         </span>
@@ -50,6 +59,19 @@ header {
       span {
         color: #fff;
       }
+    }
+  }
+
+  .user-details {
+    align-items: center;
+    img {
+      border: 2px solid #fff;
+      border-radius: 50%;
+      margin: 16px auto;
+      position: relative;
+      transition: all 0.4s;
+      width: 40px;
+      margin-inline-end: 10px;
     }
   }
 }

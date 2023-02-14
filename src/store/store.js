@@ -1,5 +1,6 @@
 
 import { contactStore } from './contact.store.js'
+import { userStore } from './user.store.js'
 import { createStore } from 'vuex'
 
 // Create a new store instance.
@@ -15,7 +16,8 @@ export const myStore = createStore({
         }
     },
     modules: {
-        contactStore
+        contactStore,
+        userStore
     }
 
 })

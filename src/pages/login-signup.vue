@@ -23,26 +23,54 @@
             required
           />
         </div>
+        <div v-if="formTitle === 'Sign up'" class="form-group">
+          <label for="phone">Phone:</label>
+          <input
+            type="phone"
+            class="form-control"
+            id="phone"
+            v-model="phone"
+            required
+          />
+        </div>
 
         <button type="submit" class="btn btn-primary">{{ formTitle }}</button>
       </form>
+      <a v-if="formTitle === 'Log in'" @click="formTitle = 'Sign up'"
+        >Sign up</a
+      >
+      <a v-if="formTitle === 'Sign up'" @click="formTitle = 'Log in'">Log in</a>
       <p v-if="errorMessage" class="mt-3 text-danger">{{ errorMessage }}</p>
     </div>
   </div>
 </template>
 
 <script>
+import { userService } from "@/services/user.service.js";
 export default {
   data() {
     return {
       email: "",
       name: "",
+      phone: "",
       formTitle: "Log in",
       errorMessage: "",
     };
   },
   methods: {
-    handleSubmit() {
+    async handleSubmit() {
+      let user = userService.getEmptyUser();
+      user.name = this.name;
+      let method = this.formTitle === "Log in" ? "login" : "signup";
+      try {
+        await this.$store.dispatch({ type: method, user });
+        console.log("user login");
+        this.$router.push("/");
+      } catch (err) {
+        console.log(err);
+        this.errorMessage = err;
+      }
+
       // handle form submission here, e.g. by calling a login API
     },
   },
@@ -67,7 +95,7 @@ export default {
     border: #c9d3e0 solid 1px;
     background-color: #fff;
     width: 600px;
-    padding: 10px 20px 20px;
+    padding: 20px 30px;
 
     form {
       display: flex;
@@ -86,7 +114,7 @@ export default {
         font-size: 26px;
       }
       input {
-        width: 70%;
+        width: 80%;
         height: 30px;
       }
       button {
@@ -95,6 +123,9 @@ export default {
         margin-top: 30px;
       }
     }
+  }
+  a {
+    color: #52627b;
   }
 }
 </style>

@@ -59,7 +59,6 @@ export const contactStore = {
     },
     actions: {
         loadContacts({ commit }, payload) {
-            console.log('payload', payload)
             contactService.getContacts(payload.filterBy)
                 .then((contacts) => {
                     commit({ type: 'setContacts', contacts })
