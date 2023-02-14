@@ -62,13 +62,14 @@ export default {
   max-width: 1100px;
   margin-inline: 30px;
   flex-direction: column;
+  background-color: #fff;
+
   .contact-list {
     padding-inline-start: 0;
     width: 100%;
 
     // margin: 20px 30px;
     // padding-block-start: 22px;
-    padding-block-end: 10px;
     border-bottom: #c9d3e0 solid 1px;
     list-style: none;
     border-collapse: collapse;

@@ -4,7 +4,7 @@
       {{ transaction.to }}
     </div>
     <div class="transiction-date">
-      {{ transaction.at }}
+      {{ date }}
     </div>
     <div class="transiction-amonut">{{ transaction.amount }}฿</div>
   </article>
@@ -16,6 +16,14 @@ export default {
     transaction: {
       type: Object,
       required: true,
+    },
+  },
+  computed: {
+    date() {
+      const date = new Date(this.transaction.at * 1000); // convert timestamp to milliseconds
+      const month = date.getMonth() + 1; // get month (returns 0-11)
+      const day = date.getDate(); // get day (returns 1-31)
+      return `${day}/${month}`;
     },
   },
 };

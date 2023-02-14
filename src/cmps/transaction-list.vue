@@ -1,7 +1,10 @@
 <template>
   <section class="transiction-list" v-if="user">
     <div class="list-details flex">
-      <h3>{{ transactions.length }} Transictions</h3>
+      <h3>
+        {{ transactions.length }}
+        <span v-if="!contactId">last</span> Transactions
+      </h3>
     </div>
     <TransitionGroup name="list" tag="ul" class="transiction-list-main">
       <div class="header flex">
@@ -47,7 +50,10 @@ export default {
         return this.user.transactions.filter(
           (transaction) => transaction.toId === this.contactId
         );
-      } else return this.user.transactions;
+      } else {
+        let lastTransition = this.user.transactions.slice(-3);
+        return lastTransition;
+      }
     },
   },
   components: {
@@ -64,13 +70,13 @@ export default {
   margin-inline: 30px;
   flex-direction: column;
   margin-top: 20px;
+  background-color: #fff;
 
   .transiction-list-main {
     padding-inline-start: 0;
     width: 100%;
     // margin: 20px 30px;
     // padding-block-start: 22px;
-    padding-block-end: 10px;
     border-bottom: #c9d3e0 solid 1px;
     list-style: none;
     border-collapse: collapse;

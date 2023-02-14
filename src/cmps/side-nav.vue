@@ -10,11 +10,6 @@
         >Contact</RouterLink
       >
       <RouterLink
-        to="/about"
-        v-bind:class="currRoute === '/about' ? 'isClicked' : ''"
-        >About</RouterLink
-      >
-      <RouterLink
         to="/stats"
         v-bind:class="currRoute === '/stats' ? 'isClicked' : ''"
         >Stats</RouterLink
@@ -23,6 +18,11 @@
         to="/signup"
         v-bind:class="currRoute === '/signup' ? 'isClicked' : ''"
         >Signup</RouterLink
+      >
+      <RouterLink
+        to="/about"
+        v-bind:class="currRoute === '/about' ? 'isClicked' : ''"
+        >About</RouterLink
       >
     </nav>
   </section>

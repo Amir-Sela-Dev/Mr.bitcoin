@@ -15,38 +15,52 @@
         <div>1$<span class="e"> = </span> {{ rate }}฿</div>
       </div>
     </div>
+    <TransactionList v-if="user" />
   </main>
 </template>
 
 <script >
 import { userService } from "@/services/user.service.js";
 import { bitcoinService } from "@/services/bitcoin.service.js";
+import TransactionList from "@/cmps/transaction-list.vue";
+
 export default {
   data() {
     return {
-      user: null,
+      // user: null,
       rate: 0,
     };
   },
   async created() {
-    this.user = await userService.getLoggedinUser();
+    // this.user = await userService.getLoggedinUser();
     this.rate = await bitcoinService.getRate();
+  },
+  computed: {
+    user() {
+      return this.$store.state.userStore.user;
+    },
+  },
+  components: {
+    TransactionList,
   },
 };
 </script>
 
 <style lang="scss" scoped>
 main {
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  // justify-content: center;
   font-size: 20px;
 }
 .wraper {
-  flex-direction: column;
+  // flex-direction: column;
+  justify-content: center;
   padding-inline: 30px;
   gap: 30px;
   border: #c9d3e0 solid 1px;
   background-color: #fff;
-  width: 500px;
+  width: 100%;
   padding: 10px 20px 20px;
 
   .user-info {

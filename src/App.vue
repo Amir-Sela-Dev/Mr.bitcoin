@@ -20,6 +20,10 @@ export default {
     AppFooter,
     SideNav,
   },
+  created() {
+    let user = this.$store.state.userStore.user;
+    if (!user) this.$router.push("/signup");
+  },
 };
 </script>
 
