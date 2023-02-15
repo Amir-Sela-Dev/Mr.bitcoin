@@ -10,7 +10,7 @@
       {{ contact.phone }}
     </div>
     <div class="option-img" @click="isOptionOpen = !isOptionOpen">
-      <img src="../../public/img/dots.png" alt="" />
+      <img src="public/img/dots.png" alt="" />
       <div class="modal" v-if="isOptionOpen">
         <RouterLink :to="`/contact/${contact._id}`">
           <button class="modal-option">Details</button>
